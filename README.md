@@ -76,28 +76,28 @@ Client-server chat applications are foundational to real-time communication over
 ## Program:
 server.py
 
-import socket
-from datetime import datetime
-s = socket.socket()
-s.bind(('localhost', 6000))
-s.listen(5)
-c, addr = s.accept()
-print("Client Address : ", addr)
-now = datetime.now()
-c.send(now.strftime("%d/%m/%y %H:%M:%S").encode())
-ack = c.recv(1024).decode()
-if ack:
-    print(ack)
-c.close()
+ import socket
+ from datetime import datetime
+ s = socket.socket()
+ s.bind(('localhost', 6000))
+ s.listen(5)
+ c, addr = s.accept()
+ print("Client Address : ", addr)
+ now = datetime.now()
+ c.send(now.strftime("%d/%m/%y %H:%M:%S").encode())
+ ack = c.recv(1024).decode()
+ if ack:
+   print(ack)
+ c.close()
 
 client.py
 
 import socket
-s = socket.socket()
+ s = socket.socket()
 s.connect(('localhost', 6000))
-print(s.getsockname())
-print(s.recv(1024).decode())
-s.send("acknowledgement received from the server".encode())
+ print(s.getsockname())
+ print(s.recv(1024).decode())
+ s.send("acknowledgement received from the server".encode())
 
 ## Output:
 
